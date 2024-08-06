@@ -1,1 +1,27 @@
-<p>home-admin works!</p>
+<div class="home-admin-container">
+  <div *ngIf="isAdmin" class="estatisticas">
+    <h2>Estatísticas</h2>
+    <div class="estatistica-card">
+      <p>Alunos: {{ quantidadeAlunos }}</p>
+    </div>
+    <div class="estatistica-card">
+      <p>Docentes: {{ quantidadeDocentes }}</p>
+    </div>
+    <div class="estatistica-card">
+      <p>Turmas: {{ quantidadeTurmas }}</p>
+    </div>
+  </div>
+  <div class="busca-alunos">
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Buscar alunos por nome, telefone ou e-mail">
+    <button (click)="searchAlunos()">Buscar</button>
+  </div>
+  <div class="lista-alunos">
+    <div *ngFor="let aluno of alunos" class="aluno-card">
+      <p>Nome: {{ aluno.nomeCompleto }}</p>
+      <p>Idade: {{ aluno.idade }}</p>
+      <p>Contato: {{ aluno.contato }}</p>
+      <button *ngIf="isAdmin" (click)="verMais(aluno)">Ver Mais</button>
+      <button *ngIf="isAdmin" (click)="lancarNota(aluno)">Lançar Nota</button>
+    </div>
+  </div>
+</div>
