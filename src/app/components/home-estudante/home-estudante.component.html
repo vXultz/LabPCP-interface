@@ -1,1 +1,25 @@
-<p>home-estudante works!</p>
+<div class="home-estudante-container">
+  <div class="sessao minhas-avaliacoes">
+    <h2>Minhas Avaliações</h2>
+    <div class="avaliacao-card" *ngFor="let avaliacao of avaliacoes">
+      <p><strong>Nome:</strong> {{ avaliacao.nome }}</p>
+      <p><strong>Matéria:</strong> {{ avaliacao.materia }}</p>
+      <p><strong>Data:</strong> {{ avaliacao.data }}</p>
+      <button (click)="verNotas(avaliacao)">Ver Notas</button>
+    </div>
+  </div>
+
+  <div class="sessao minhas-materias">
+    <h2>Minhas Matérias</h2>
+    <div class="materia-card" *ngFor="let materia of materias">
+      <p>{{ materia }}</p>
+    </div>
+  </div>
+
+  <div class="sessao cursos-extras">
+    <h2>Cursos Extras</h2>
+    <div class="curso-card" *ngFor="let curso of cursosExtras">
+      <p>{{ curso }}</p>
+    </div>
+  </div>
+</div>
