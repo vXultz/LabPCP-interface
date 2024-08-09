@@ -4,10 +4,10 @@
       <h1>Menu</h1>
       <button mat-button class="nav-button" (click)="irParaHome()">Início</button>
       <h3>Cadastros</h3>
-      <button mat-button *ngIf="isAdmin" routerLink="/cadastro-aluno">Cadastro de Aluno</button>
+      <button mat-button *ngIf="isAdmin" routerLink="/registro-aluno">Cadastro de Aluno</button>
       <button mat-button *ngIf="isAdmin" routerLink="/registro-docente">Cadastro Docente</button>
-      <button mat-button *ngIf="isAdmin || isDocente" routerLink="/cadastro-turma">Cadastro de Turma</button>
-      <button mat-button *ngIf="isAdmin || isDocente" routerLink="/cadastro-avaliacao">Cadastro de Avaliação</button>
+      <button mat-button *ngIf="isAdmin || isDocente" routerLink="/registro-turma">Cadastro de Turma</button>
+      <button mat-button *ngIf="isAdmin || isDocente" routerLink="/registro-avaliacao">Cadastro de Avaliação</button>
       <h3>Listagens</h3>
       <button mat-button *ngIf="isAdmin" routerLink="/listagem-docentes">Listagem de Docentes</button>
       <button mat-button *ngIf="isAluno" routerLink="/notas">Notas</button>
