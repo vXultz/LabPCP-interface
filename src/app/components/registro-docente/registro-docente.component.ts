@@ -63,11 +63,23 @@ export class RegistroDocenteComponent implements OnInit {
   onSubmit(): void {
     if (this.docenteForm.valid) {
       const formData = this.docenteForm.value;
-      localStorage.setItem('docenteData', JSON.stringify(formData));
+      formData.id = this.gerarIdUnico();
+
+      const docentes = JSON.parse(localStorage.getItem('docentes') || '[]');
+      docentes.push(formData);
+      localStorage.setItem('docentes', JSON.stringify(docentes));
+
       alert('Dados salvos com sucesso!');
     } else {
       alert('Por favor, preencha todos os campos obrigatórios.');
     }
+  }
+
+  gerarIdUnico(): number {
+    const ultimoId = localStorage.getItem('ultimoDocenteId');
+    const novoId = ultimoId ? parseInt(ultimoId, 10) + 1 : 1;
+    localStorage.setItem('ultimoDocenteId', novoId.toString());
+    return novoId;
   }
 
   onEdit(): void {
