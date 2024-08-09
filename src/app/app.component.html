@@ -1,4 +1,5 @@
 <app-sidebar *ngIf="!isLoginPage" (sidebarToggled)="toggleSidebar()">
+  <app-toolbar></app-toolbar>
   <div [class.collapsed]="isSidebarCollapsed" class="content">
     <router-outlet></router-outlet>
   </div>

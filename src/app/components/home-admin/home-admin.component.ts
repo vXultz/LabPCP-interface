@@ -4,11 +4,12 @@ import { AuthService } from '../../services/auth.service';
 import { AlunoService } from '../../services/aluno.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ToolbarComponent } from '../toolbar/toolbar.component';
 
 @Component({
   selector: 'app-home-admin',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ToolbarComponent],
   templateUrl: './home-admin.component.html',
   styleUrls: ['./home-admin.component.css']
 })

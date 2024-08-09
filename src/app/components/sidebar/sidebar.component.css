@@ -39,7 +39,11 @@ button:hover {
 
 
 .menu-button {
+  position: absolute;
   width: auto;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
   background-color: transparent;
   padding: 0.5rem;
   text-align: center;
