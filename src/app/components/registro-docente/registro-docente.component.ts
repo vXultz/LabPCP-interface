@@ -101,7 +101,11 @@ export class RegistroDocenteComponent implements OnInit {
   }
 
   cpfValidator(control: AbstractControl): { [key: string]: boolean } | null {
-    const cpf = control.value.replace(/\D/g, '');
+    const value = control.value;
+    if (!value) {
+      return { invalidCPF: true };
+    }
+    const cpf = value.replace(/\D/g, '');
     if (cpf.length !== 11 || !this.isValidCPF(cpf)) {
       return { invalidCPF: true };
     }

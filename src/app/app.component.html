@@ -1,1 +1,7 @@
-<router-outlet></router-outlet>
+<app-sidebar *ngIf="!isLoginPage" (sidebarToggled)="toggleSidebar()">
+  <div [class.collapsed]="isSidebarCollapsed" class="content">
+    <router-outlet></router-outlet>
+  </div>
+</app-sidebar>
+
+<router-outlet *ngIf="isLoginPage"></router-outlet>

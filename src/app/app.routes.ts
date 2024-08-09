@@ -9,11 +9,10 @@ import { authGuard } from './guards/auth.guard';
 import { roleGuard } from './guards/role.guard';
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'home-admin', component: HomeAdminComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: 'Admin' || 'Docente' } },
   { path: 'home-estudante', component: HomeEstudanteComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: 'Aluno' } },
   { path: 'registro-docente', component: RegistroDocenteComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: 'Admin' } },
-  { path: '**', redirectTo: '', component: LoginComponent }
 ];
 
 export const routeProviders = [
