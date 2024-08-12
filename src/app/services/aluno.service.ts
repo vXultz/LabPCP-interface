@@ -11,13 +11,17 @@ export class AlunoService {
   ];
 
   getAlunos(): Observable<any[]> {
-    return of(this.alunos);
+    const storedAlunos = JSON.parse(localStorage.getItem('alunos') || '[]');
+    const allAlunos = [...this.alunos, ...storedAlunos];
+    return of(allAlunos);
   }
 
   searchAlunos(query: string): Observable<any[]> {
-    return of(this.alunos.filter(aluno =>
+    const storedAlunos = JSON.parse(localStorage.getItem('alunos') || '[]');
+    const allAlunos = [...this.alunos, ...storedAlunos];
+    return of(allAlunos.filter(aluno =>
       aluno.nomeCompleto.includes(query) ||
-      aluno.contato.includes(query)
+      aluno.telefone.includes(query)
     ));
   }
 

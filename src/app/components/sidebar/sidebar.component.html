@@ -5,7 +5,7 @@
       <button mat-button class="nav-button" (click)="irParaHome()">Início</button>
       <h3 *ngIf="isAdmin || isDocente">Cadastros</h3>
       <button mat-button *ngIf="isAdmin" routerLink="/registro-aluno">Cadastro de Aluno</button>
-      <button mat-button *ngIf="isAdmin" routerLink="/registro-docente">Cadastro Docente</button>
+      <button mat-button *ngIf="isAdmin" routerLink="/registro-docente">Cadastro de Docente</button>
       <button mat-button *ngIf="isAdmin || isDocente" routerLink="/registro-turma">Cadastro de Turma</button>
       <button mat-button *ngIf="isAdmin || isDocente" routerLink="/registro-avaliacao">Cadastro de Avaliação</button>
       <h3>Listagens</h3>

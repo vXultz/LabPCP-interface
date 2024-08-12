@@ -6,33 +6,32 @@ import { ViacepService } from '../../services/viacep.service';
 import { MatFormField, MatSelectModule } from '@angular/material/select';
 
 @Component({
-  selector: 'app-registro-docente',
+  selector: 'app-registro-aluno',
   standalone: true,
   imports: [ReactiveFormsModule, HttpClientModule, CommonModule, MatSelectModule, MatFormField],
   providers: [ViacepService],
-  templateUrl: './registro-docente.component.html',
-  styleUrls: ['./registro-docente.component.css']
+  templateUrl: './registro-aluno.component.html',
+  styleUrl: './registro-aluno.component.css'
 })
-export class RegistroDocenteComponent implements OnInit {
-  docenteForm: FormGroup = new FormGroup({});
+export class RegistroAlunoComponent {
+  alunoForm: FormGroup = new FormGroup({});
   isEditMode = false;
-  materiasOpcao = ['Matemática', 'Português', 'História', 'Geografia', 'Ciências', 'Inglês'];
+  turmasOpcao = ['turma 1', 'turma 2'];
 
   constructor(private fb: FormBuilder, private viacepService: ViacepService) { }
 
   ngOnInit(): void {
-    this.docenteForm = this.fb.group({
+    this.alunoForm = this.fb.group({
       nomeCompleto: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
       telefone: ['', [Validators.required]],
       genero: ['', Validators.required],
-      estadoCivil: ['', Validators.required],
+      turma: [[], Validators.required],
       dataNascimento: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required, Validators.minLength(8)]],
       cpf: ['', [Validators.required, this.cpfValidator.bind(this)]],
       rg: ['', [Validators.required, Validators.maxLength(20)]],
       naturalidade: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
-      materias: [[], Validators.required],
       endereco: this.fb.group({
         cep: ['', Validators.required],
         logradouro: ['', Validators.required],
@@ -43,31 +42,23 @@ export class RegistroDocenteComponent implements OnInit {
       }),
     });
 
-    const savedData = localStorage.getItem('docenteData');
+    const savedData = localStorage.getItem('alunoData');
     if (savedData) {
-      this.docenteForm.setValue(JSON.parse(savedData));
+      this.alunoForm.setValue(JSON.parse(savedData));
     }
-  }
-
-  materiaSelecionada(event: any) {
-    const options = event.target.options;
-    const materiaSelecionada: string[] = [];
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].selected) {
-        materiaSelecionada.push(options[i].value);
-      }
-    }
-    this.docenteForm.get('materias')?.setValue(materiaSelecionada);
+    const turmasSalvas = JSON.parse(localStorage.getItem('turmas') || '[]');
+    const turmasNomes = turmasSalvas.map((turma: any) => turma.nomeTurma);
+    this.turmasOpcao = [...this.turmasOpcao, ...turmasNomes];
   }
 
   onSubmit(): void {
-    if (this.docenteForm.valid) {
-      const formData = this.docenteForm.value;
+    if (this.alunoForm.valid) {
+      const formData = this.alunoForm.value;
       formData.id = this.gerarIdUnico();
 
-      const docentes = JSON.parse(localStorage.getItem('docentes') || '[]');
-      docentes.push(formData);
-      localStorage.setItem('docentes', JSON.stringify(docentes));
+      const alunos = JSON.parse(localStorage.getItem('aluno') || '[]');
+      alunos.push(formData);
+      localStorage.setItem('aluno', JSON.stringify(alunos));
 
       alert('Dados salvos com sucesso!');
     } else {
@@ -76,9 +67,9 @@ export class RegistroDocenteComponent implements OnInit {
   }
 
   gerarIdUnico(): number {
-    const ultimoId = localStorage.getItem('ultimoDocenteId');
+    const ultimoId = localStorage.getItem('ultimoAlunoId');
     const novoId = ultimoId ? parseInt(ultimoId, 10) + 1 : 1;
-    localStorage.setItem('ultimoDocenteId', novoId.toString());
+    localStorage.setItem('ultimoAlunoId', novoId.toString());
     return novoId;
   }
 
@@ -87,7 +78,7 @@ export class RegistroDocenteComponent implements OnInit {
   }
 
   onDelete(): void {
-    this.docenteForm.reset();
+    this.alunoForm.reset();
     alert('Formulário resetado com sucesso!');
   }
 
@@ -99,9 +90,9 @@ export class RegistroDocenteComponent implements OnInit {
   }
 
   buscarCep(): void {
-    const cep = this.docenteForm.get('endereco.cep')?.value;
+    const cep = this.alunoForm.get('endereco.cep')?.value;
     this.viacepService.buscarCep(cep).subscribe(dados => {
-      this.docenteForm.patchValue({
+      this.alunoForm.patchValue({
         endereco: {
           cidade: dados.localidade,
           estado: dados.uf,
@@ -139,5 +130,4 @@ export class RegistroDocenteComponent implements OnInit {
     if (remainder !== parseInt(cpf.substring(10, 11))) return false;
     return true;
   }
-
 }

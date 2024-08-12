@@ -4,13 +4,13 @@ import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-home-estudante',
+  selector: 'app-home-aluno',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './home-estudante.component.html',
-  styleUrls: ['./home-estudante.component.css']
+  templateUrl: './home-aluno.component.html',
+  styleUrls: ['./home-aluno.component.css']
 })
-export class HomeEstudanteComponent {
+export class HomeAlunoComponent {
   avaliacoes = [
     { nome: 'Prova de Matemática', materia: 'Matemática', data: '2023-10-01' },
     { nome: 'Trabalho de História', materia: 'História', data: '2023-09-25' },
