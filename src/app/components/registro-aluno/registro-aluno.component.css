@@ -27,6 +27,7 @@ h2 {
 
 .action-buttons button:last-child {
   background-color: #f44336;
+  margin-right: 4rem;
 }
 
 .div1,
@@ -37,7 +38,6 @@ h2 {
 .div6 {
   display: flex;
   flex-wrap: wrap;
-  gap: 2.5rem;
   width: 100%;
 }
 
@@ -80,6 +80,7 @@ h2 {
   font-size: 1.6rem;
   transition: border-color 0.3s;
   margin-bottom: 1rem;
+  box-sizing: border-box;
 }
 
 .form-group input:focus,
