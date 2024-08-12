@@ -13,7 +13,7 @@ import { MatFormField, MatSelectModule } from '@angular/material/select';
   templateUrl: './registro-aluno.component.html',
   styleUrl: './registro-aluno.component.css'
 })
-export class RegistroAlunoComponent {
+export class RegistroAlunoComponent implements OnInit {
   alunoForm: FormGroup = new FormGroup({});
   isEditMode = false;
   turmasOpcao = ['turma 1', 'turma 2'];
@@ -56,9 +56,9 @@ export class RegistroAlunoComponent {
       const formData = this.alunoForm.value;
       formData.id = this.gerarIdUnico();
 
-      const alunos = JSON.parse(localStorage.getItem('aluno') || '[]');
+      const alunos = JSON.parse(localStorage.getItem('alunos') || '[]');
       alunos.push(formData);
-      localStorage.setItem('aluno', JSON.stringify(alunos));
+      localStorage.setItem('alunos', JSON.stringify(alunos));
 
       alert('Dados salvos com sucesso!');
     } else {
