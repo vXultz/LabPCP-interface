@@ -12,7 +12,7 @@ export const roleGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
     if (usuarioLogado.role === 'Admin' || usuarioLogado.role === 'Docente') {
       router.navigate(['/home-admin']);
     } else if (usuarioLogado.role === 'Aluno') {
-      router.navigate(['/home-estudante']);
+      router.navigate(['/home-aluno']);
     } else {
       router.navigate(['/login']);
     }
