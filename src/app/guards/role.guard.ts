@@ -6,7 +6,7 @@ export const roleGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
   const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || '{}');
   const expectedRole = route.data['expectedRole'];
 
-  if (usuarioLogado.role !== expectedRole) {
+  if (!expectedRole.includes(usuarioLogado.role)) {
     alert('Você não tem permissão para acessar esta página.');
 
     if (usuarioLogado.role === 'Admin' || usuarioLogado.role === 'Docente') {
