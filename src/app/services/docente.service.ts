@@ -17,7 +17,7 @@ export class DocenteService {
     const storedDocentes = JSON.parse(localStorage.getItem('docentes') || '[]');
     const allDocentes = [...this.docentes, ...storedDocentes];
     return of(allDocentes.filter(docente =>
-      docente.nomeCompleto.includes(query) ||
+      docente.nome.includes(query) ||
       docente.telefone.includes(query)
     ));
   }

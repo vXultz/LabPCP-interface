@@ -44,7 +44,7 @@ export class ListaDocentesComponent implements OnInit {
       this.carregarDocentes();
     } else {
       this.docentes = this.docentes.filter(docente =>
-        docente.nomeCompleto.toLowerCase().startsWith(this.searchQuery.toLowerCase()) ||
+        docente.nome.toLowerCase().startsWith(this.searchQuery.toLowerCase()) ||
         docente.id.toString().startsWith(this.searchQuery)
       );
     }

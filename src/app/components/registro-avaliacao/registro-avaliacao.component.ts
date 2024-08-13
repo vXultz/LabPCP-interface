@@ -29,10 +29,10 @@ export class RegistroAvaliacaoComponent implements OnInit {
 
   ngOnInit(): void {
     const docentes = JSON.parse(localStorage.getItem('docentes') || '[]');
-    this.docentesOpcao = docentes.map((docente: any) => docente.nomeCompleto);
+    this.docentesOpcao = docentes.map((docente: any) => docente.nome);
 
     const alunos = JSON.parse(localStorage.getItem('alunos') || '[]');
-    this.alunosOpcao = alunos.map((aluno: any) => aluno.nomeCompleto);
+    this.alunosOpcao = alunos.map((aluno: any) => aluno.nome);
   }
 
   onSubmit(): void {
@@ -44,11 +44,11 @@ export class RegistroAvaliacaoComponent implements OnInit {
       formData.dataAvaliacao = dataAvaliacao.toLocaleDateString('pt-BR');
 
       const docentes = JSON.parse(localStorage.getItem('docentes') || '[]');
-      const docenteSelecionado = docentes.find((docente: any) => docente.nomeCompleto === formData.docente);
+      const docenteSelecionado = docentes.find((docente: any) => docente.nome === formData.docente);
       formData.docenteId = docenteSelecionado ? docenteSelecionado.id : null;
 
       const alunos = JSON.parse(localStorage.getItem('alunos') || '[]');
-      const alunoSelecionado = alunos.find((aluno: any) => aluno.nomeCompleto === formData.aluno);
+      const alunoSelecionado = alunos.find((aluno: any) => aluno.nome === formData.aluno);
       formData.alunoId = alunoSelecionado ? alunoSelecionado.id : null;
 
       const avaliacoes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');

@@ -28,7 +28,7 @@ export class RegistroTurmaComponent implements OnInit {
 
   ngOnInit(): void {
     const docentes = JSON.parse(localStorage.getItem('docentes') || '[]');
-    this.docentesOpcao = docentes.map((docente: any) => docente.nomeCompleto);
+    this.docentesOpcao = docentes.map((docente: any) => docente.nome);
   }
 
   onSubmit(): void {

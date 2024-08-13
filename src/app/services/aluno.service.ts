@@ -23,7 +23,7 @@ export class AlunoService {
     const storedAlunos = JSON.parse(localStorage.getItem('alunos') || '[]');
     const allAlunos = [...this.alunos, ...storedAlunos];
     return of(allAlunos.filter(aluno =>
-      aluno.nomeCompleto.includes(query) ||
+      aluno.nome.includes(query) ||
       aluno.telefone.includes(query)
     ));
   }

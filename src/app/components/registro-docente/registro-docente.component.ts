@@ -34,7 +34,7 @@ export class RegistroDocenteComponent implements OnInit {
 
   ngOnInit(): void {
     this.docenteForm = this.fb.group({
-      nomeCompleto: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
+      nome: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
       telefone: ['', [Validators.required]],
       genero: ['', Validators.required],
       estadoCivil: ['', Validators.required],

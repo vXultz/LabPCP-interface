@@ -13,7 +13,7 @@
   <div class="lista-docentes">
     <div *ngFor="let docente of docentes" class="docente-card">
       <p>{{ docente.id }}</p>
-      <p>{{ docente.nomeCompleto }}</p>
+      <p>{{ docente.nome }}</p>
       <p>{{ docente.telefone }}</p>
       <button (click)="verMais(docente.id)">Ver Mais</button>
     </div>
