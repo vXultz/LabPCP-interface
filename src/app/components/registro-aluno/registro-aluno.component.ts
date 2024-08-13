@@ -52,6 +52,10 @@ export class RegistroAlunoComponent implements OnInit {
       }),
     });
 
+    const turmasSalvas = JSON.parse(localStorage.getItem('turmas') || '[]');
+    const turmasNomes = turmasSalvas.map((turma: any) => turma.nomeTurma);
+    this.turmasOpcao = [...this.turmasOpcao, ...turmasNomes];
+
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.isEditMode = true;
@@ -61,10 +65,6 @@ export class RegistroAlunoComponent implements OnInit {
         this.alunoForm.patchValue(this.aluno);
       }
     }
-
-    const turmasSalvas = JSON.parse(localStorage.getItem('turmas') || '[]');
-    const turmasNomes = turmasSalvas.map((turma: any) => turma.nomeTurma);
-    this.turmasOpcao = [...this.turmasOpcao, ...turmasNomes];
   }
 
   onSubmit(): void {
@@ -151,6 +151,19 @@ export class RegistroAlunoComponent implements OnInit {
 
       const dataNascimento = new Date(formData.dataNascimento);
       formData.dataNascimento = dataNascimento.toLocaleDateString('pt-BR');
+
+      const turmas = JSON.parse(localStorage.getItem('turmas') || '[]');
+      console.log('Turmas carregadas:', turmas);
+      const turmaSelecionada = turmas.find((turma: any) => turma.nomeTurma === formData.turma);
+      console.log('Turma selecionada:', turmaSelecionada);
+
+      if (turmaSelecionada) {
+        formData.turmaId = turmaSelecionada.id;
+        console.log('Turma ID:', formData.turmaId);
+      } else {
+        formData.turmaId = null;
+        console.log('Nenhuma turma encontrada com o nome:', formData.turma);
+      }
 
       const alunos = JSON.parse(localStorage.getItem('alunos') || '[]');
       const index = alunos.findIndex((d: { id: any; }) => d.id === this.aluno.id);
