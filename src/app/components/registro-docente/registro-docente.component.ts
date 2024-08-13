@@ -92,9 +92,49 @@ export class RegistroDocenteComponent implements OnInit {
 
       alert('Dados salvos com sucesso!');
     } else {
-      alert('Por favor, preencha todos os campos obrigatórios.');
+      const errors = this.getFormValidationErrors();
+      alert(`Por favor, corrija os seguintes erros:\n${errors.join('\n')}`);
     }
   }
+
+  getFormValidationErrors(): string[] {
+    const errors: string[] = [];
+    const controls = this.docenteForm.controls;
+
+    Object.keys(controls).forEach(key => {
+      const controlErrors = controls[key].errors;
+      if (controlErrors) {
+        Object.keys(controlErrors).forEach(errorKey => {
+          errors.push(this.getErrorMessage(key, errorKey, controlErrors[errorKey]));
+        });
+      }
+    });
+
+    const enderecoControls = (controls['endereco'] as FormGroup).controls;
+    Object.keys(enderecoControls).forEach(key => {
+      const controlErrors = enderecoControls[key].errors;
+      if (controlErrors) {
+        Object.keys(controlErrors).forEach(errorKey => {
+          errors.push(this.getErrorMessage(key, errorKey, controlErrors[errorKey]));
+        });
+      }
+    });
+
+    return errors;
+  }
+
+  getErrorMessage(controlName: string, errorKey: string, errorValue: any): string {
+    const messages: { [key: string]: string } = {
+      required: `${controlName} é obrigatório.`,
+      minlength: `${controlName} deve ter no mínimo ${errorValue.requiredLength} caracteres.`,
+      maxlength: `${controlName} deve ter no máximo ${errorValue.requiredLength} caracteres.`,
+      email: `Email inválido.`,
+      invalidCPF: `CPF inválido.`
+    };
+
+    return messages[errorKey] || `${controlName} está inválido.`;
+  }
+
 
   gerarIdUnico(): number {
     const ultimoId = localStorage.getItem('ultimoDocenteId');
