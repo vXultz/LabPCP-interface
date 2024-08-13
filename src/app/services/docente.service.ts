@@ -5,10 +5,7 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class DocenteService {
-  private docentes = [
-    { id: 1, nomeCompleto: 'João Silva', telefone: '99 999999999' },
-    { id: 2, nomeCompleto: 'Maria Oliveira', telefone: '99 999999999' },
-  ];
+  private docentes = [];
 
   getDocentes(): Observable<any[]> {
     const storedDocentes = JSON.parse(localStorage.getItem('docentes') || '[]');
@@ -23,5 +20,10 @@ export class DocenteService {
       docente.nomeCompleto.includes(query) ||
       docente.telefone.includes(query)
     ));
+  }
+
+  getQuantidadeDocentes(): number {
+    const storedDocentes = JSON.parse(localStorage.getItem('docentes') || '[]');
+    return storedDocentes.length;
   }
 }

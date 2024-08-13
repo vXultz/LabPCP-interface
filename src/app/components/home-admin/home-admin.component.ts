@@ -5,6 +5,8 @@ import { AlunoService } from '../../services/aluno.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
+import { DocenteService } from '../../services/docente.service';
+import { TurmaService } from '../../services/turma.service';
 
 @Component({
   selector: 'app-home-admin',
@@ -15,6 +17,7 @@ import { ToolbarComponent } from '../toolbar/toolbar.component';
 })
 export class HomeAdminComponent implements OnInit {
   isAdmin: boolean = false;
+  isDocente: boolean = false;
   alunos: any[] = [];
   searchQuery: string = '';
   quantidadeAlunos: number = 0;
@@ -24,12 +27,15 @@ export class HomeAdminComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private alunoService: AlunoService
+    private alunoService: AlunoService,
+    private docenteService: DocenteService,
+    private turmaService: TurmaService
   ) { }
 
   ngOnInit() {
     const user = this.authService.getUsuarioLogado();
     this.isAdmin = user.role === 'Admin';
+    this.isDocente = user.role === 'Docente';
     this.loadAlunos();
     this.loadEstatisticas();
   }
@@ -40,10 +46,14 @@ export class HomeAdminComponent implements OnInit {
     });
   }
 
-  searchAlunos() {
-    this.alunoService.searchAlunos(this.searchQuery).subscribe((data) => {
-      this.alunos = data;
-    });
+  buscarAlunos() {
+    if (this.searchQuery.trim() === '') {
+      this.loadAlunos();
+    } else {
+      this.alunoService.buscarAlunos(this.searchQuery).subscribe((data) => {
+        this.alunos = data;
+      });
+    }
   }
 
   verMais(aluno: any) {
@@ -56,7 +66,9 @@ export class HomeAdminComponent implements OnInit {
 
   loadEstatisticas() {
     this.quantidadeAlunos = this.alunoService.getQuantidadeAlunos();
-    this.quantidadeDocentes = this.alunoService.getQuantidadeDocentes();
-    this.quantidadeTurmas = this.alunoService.getQuantidadeTurmas();
+    this.quantidadeDocentes = this.docenteService.getQuantidadeDocentes();
+    this.quantidadeTurmas = this.turmaService.getQuantidadeTurmas();
   }
+
+
 }

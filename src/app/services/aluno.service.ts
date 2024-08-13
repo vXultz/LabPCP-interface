@@ -19,7 +19,7 @@ export class AlunoService {
     return of(allAlunos.find(aluno => aluno.id === id));
   }
 
-  searchAlunos(query: string): Observable<any[]> {
+  buscarAlunos(query: string): Observable<any[]> {
     const storedAlunos = JSON.parse(localStorage.getItem('alunos') || '[]');
     const allAlunos = [...this.alunos, ...storedAlunos];
     return of(allAlunos.filter(aluno =>
@@ -29,17 +29,8 @@ export class AlunoService {
   }
 
   getQuantidadeAlunos(): number {
-    return this.alunos.length;
-  }
-
-  getQuantidadeDocentes(): number {
-    // fazer o método
-    return 10;
-  }
-
-  getQuantidadeTurmas(): number {
-    // fazer o método
-    return 5;
+    const storedAlunos = JSON.parse(localStorage.getItem('alunos') || '[]');
+    return storedAlunos.length;
   }
 
   getTurmaById(id: number): Observable<any> {

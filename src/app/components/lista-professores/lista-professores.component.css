@@ -1,5 +1,5 @@
 .lista-professores-container {
-  padding: 20px;
+  padding: 2.5rem;
 }
 
 .busca-docentes {
@@ -7,7 +7,7 @@
 }
 
 .busca-docentes input {
-  width: 30%;
+  width: 40%;
   padding: 1.2rem;
   border: 3px solid #8573e8;
   border-radius: 0.7rem;
@@ -19,7 +19,7 @@
 h2 {
   font-size: 3rem;
   color: #735fe2;
-  margin: 5rem 0;
+  margin-bottom: 5rem;
 }
 
 .lista-docentes {

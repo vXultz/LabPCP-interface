@@ -1,27 +1,38 @@
 <div class="home-admin-container">
-  <div *ngIf="isAdmin" class="estatisticas">
+  <div>
     <h2>Estatísticas</h2>
+  </div>
+  <div *ngIf="isAdmin" class="estatisticas">
     <div class="estatistica-card">
-      <p>Alunos: {{ quantidadeAlunos }}</p>
+      <h1>{{ quantidadeAlunos }}</h1>
+      <p>Alunos</p>
     </div>
     <div class="estatistica-card">
-      <p>Docentes: {{ quantidadeDocentes }}</p>
+      <h1>{{ quantidadeDocentes }}</h1>
+      <p>Docentes</p>
     </div>
     <div class="estatistica-card">
-      <p>Turmas: {{ quantidadeTurmas }}</p>
+      <h1>{{ quantidadeTurmas }}</h1>
+      <p>Turmas</p>
     </div>
   </div>
+  <h3>Pesquisar aluno</h3>
   <div class="busca-alunos">
-    <input type="text" [(ngModel)]="searchQuery" placeholder="Buscar alunos por nome, telefone ou e-mail">
-    <button (click)="searchAlunos()">Buscar</button>
+    <input type="text" [(ngModel)]="searchQuery" (input)="buscarAlunos()"
+      placeholder="Buscar alunos por nome ou telefone">
   </div>
   <div class="lista-alunos">
     <div *ngFor="let aluno of alunos" class="aluno-card">
-      <p>Nome: {{ aluno.nomeCompleto }}</p>
-      <p>Idade: {{ aluno.idade }}</p>
-      <p>Contato: {{ aluno.contato }}</p>
-      <button *ngIf="isAdmin" (click)="verMais(aluno)">Ver Mais</button>
-      <button *ngIf="isAdmin" (click)="lancarNota(aluno)">Lançar Nota</button>
+      <div>
+        <img src="/assets/images/user.svg" alt="Foto do aluno" class="foto-aluno">
+      </div>
+      <div class="info-aluno">
+        <h3>{{ aluno.nomeCompleto }}</h3>
+        <p>{{ aluno.dataNascimento }}</p>
+        <p>{{ aluno.telefone }}</p>
+      </div>
+      <button *ngIf="isAdmin" (click)="verMais(aluno)">Ver mais</button>
+      <button *ngIf="isDocente" (click)="lancarNota(aluno)">Lançar nota</button>
     </div>
   </div>
 </div>

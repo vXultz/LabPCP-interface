@@ -16,7 +16,7 @@ import { MatFormField, MatSelectModule } from '@angular/material/select';
 export class RegistroAlunoComponent implements OnInit {
   alunoForm: FormGroup = new FormGroup({});
   isEditMode = false;
-  turmasOpcao = ['turma 1', 'turma 2'];
+  turmasOpcao: string[] = [];
 
   constructor(private fb: FormBuilder, private viacepService: ViacepService) { }
 
