@@ -16,7 +16,7 @@ import { MatFormField, MatSelectModule } from '@angular/material/select';
 export class RegistroAlunoComponent implements OnInit {
   alunoForm: FormGroup = new FormGroup({});
   isEditMode = false;
-  turmasOpcao = ['turma 1', 'turma 2'];
+  turmasOpcao: string[] = [];
 
   constructor(private fb: FormBuilder, private viacepService: ViacepService) { }
 
@@ -55,6 +55,9 @@ export class RegistroAlunoComponent implements OnInit {
     if (this.alunoForm.valid) {
       const formData = this.alunoForm.value;
       formData.id = this.gerarIdUnico();
+
+      const dataNascimento = new Date(formData.dataNascimento);
+      formData.dataNascimento = dataNascimento.toLocaleDateString('pt-BR');
 
       const turmas = JSON.parse(localStorage.getItem('turmas') || '[]');
       console.log('Turmas carregadas:', turmas);

@@ -1,36 +1,97 @@
 .home-admin-container {
-  padding: 20px;
+  padding: 2rem 5rem;
+}
+
+h2 {
+  font-size: 3rem;
+  color: #735fe2;
+  margin-bottom: 3rem;
+}
+
+h3 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
 }
 
 .estatisticas {
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
   margin-bottom: 20px;
 }
 
 .estatistica-card {
-  border: 1px solid #ccc;
+  width: 25%;
+  background-color: #8573e8;
   padding: 20px;
-  width: 200px;
-  text-align: center;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  text-align: center;
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 3rem;
 }
 
-.busca-alunos {
-  margin-bottom: 20px;
+.estatistica-card p {
+  font-size: 3rem;
+}
+
+.busca-alunos input {
+  width: 30%;
+  padding: 1.2rem;
+  border: 3px solid #8573e8;
+  border-radius: 0.7rem;
+  font-size: 1.6rem;
+  transition: border-color 0.3s;
+  margin-bottom: 3rem;
 }
 
 .lista-alunos {
   display: flex;
   flex-wrap: wrap;
+  gap: 4rem;
 }
 
 .aluno-card {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 10px;
+  border: 3px solid #8573e8;
+  border-radius: 0.7rem;
+  background-color: white;
+  padding: 1.5rem;
   width: 200px;
   text-align: center;
+}
+
+.aluno-card button {
+  width: 100%;
+  background-color: #8573e8;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 1rem;
+}
+
+.foto-aluno {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.info-aluno h3 {
+  font-size: 2rem;
+}
+
+.info-aluno p {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: #606060;
+  font-weight: 500;
+}
+
+.info-aluno p:last-child {
+  color: #333;
+  font-weight: bold;
 }

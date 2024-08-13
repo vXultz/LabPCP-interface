@@ -1,14 +1,27 @@
-.login-container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 1em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+html,
+body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.login-container h2 {
+.login-container {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  padding: 3rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.login-container h3 {
   text-align: center;
+  font-size: 4rem;
+  font-weight: 400;
+  margin-bottom: 3rem;
 }
 
 .login-container form {
@@ -21,29 +34,40 @@
 }
 
 .login-container form label {
+  display: block;
   margin-bottom: 0.5em;
-  font-weight: bold;
+  font-size: 1.6rem;
+  font-weight: 500;
 }
 
 .login-container form input {
-  padding: 0.5em;
-  font-size: 1em;
+  width: 100%;
+  padding: 1.2rem;
+  border: 3px solid #8573e8;
+  border-radius: 0.7rem;
+  font-size: 1.6rem;
+  transition: border-color 0.3s;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
 }
 
 .login-container button {
-  padding: 0.5em;
-  font-size: 1em;
-  margin-top: 1em;
+  padding: 1.2rem 2.5rem;
+  background-color: #6e42e5;
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.login-container a {
-  display: block;
-  text-align: center;
-  margin-top: 1em;
-  color: #007bff;
-  text-decoration: none;
+.login-button {
+  font-size: 2.4rem;
+  margin: 3rem 0;
 }
 
-.login-container a:hover {
-  text-decoration: underline;
+.action-button {
+  display: flex;
+  justify-content: space-around;
+  font-size: 1rem;
 }

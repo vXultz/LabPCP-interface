@@ -65,6 +65,9 @@ export class RegistroDocenteComponent implements OnInit {
       const formData = this.docenteForm.value;
       formData.id = this.gerarIdUnico();
 
+      const dataNascimento = new Date(formData.dataNascimento);
+      formData.dataNascimento = dataNascimento.toLocaleDateString('pt-BR');
+
       const docentes = JSON.parse(localStorage.getItem('docentes') || '[]');
       docentes.push(formData);
       localStorage.setItem('docentes', JSON.stringify(docentes));

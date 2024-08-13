@@ -35,6 +35,13 @@ export class RegistroTurmaComponent implements OnInit {
     if (this.turmaForm.valid) {
       const formData = this.turmaForm.value;
       formData.id = this.gerarIdUnico();
+
+      const dataInicio = new Date(formData.dataInicio);
+      formData.dataInicio = dataInicio.toLocaleDateString('pt-BR');
+
+      const dataTermino = new Date(formData.dataTermino);
+      formData.dataTermino = dataTermino.toLocaleDateString('pt-BR');
+
       const turmas = JSON.parse(localStorage.getItem('turmas') || '[]');
       turmas.push(formData);
       localStorage.setItem('turmas', JSON.stringify(turmas));

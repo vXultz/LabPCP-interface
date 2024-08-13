@@ -19,7 +19,7 @@ export class AlunoService {
     return of(allAlunos.find(aluno => aluno.id === id));
   }
 
-  searchAlunos(query: string): Observable<any[]> {
+  buscarAlunos(query: string): Observable<any[]> {
     const storedAlunos = JSON.parse(localStorage.getItem('alunos') || '[]');
     const allAlunos = [...this.alunos, ...storedAlunos];
     return of(allAlunos.filter(aluno =>
@@ -29,17 +29,8 @@ export class AlunoService {
   }
 
   getQuantidadeAlunos(): number {
-    return this.alunos.length;
-  }
-
-  getQuantidadeDocentes(): number {
-    // fazer o método
-    return 10;
-  }
-
-  getQuantidadeTurmas(): number {
-    // fazer o método
-    return 5;
+    const storedAlunos = JSON.parse(localStorage.getItem('alunos') || '[]');
+    return storedAlunos.length;
   }
 
   getTurmaById(id: number): Observable<any> {
@@ -50,5 +41,13 @@ export class AlunoService {
   getAvaliacoesByAlunoId(alunoId: number): Observable<any[]> {
     const todasAvaliacoes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');
     return of(todasAvaliacoes.filter((avaliacao: any) => avaliacao.alunoId === alunoId));
+  }
+
+  calcularIdade(dataNascimento: string): number {
+    const [dia, mes, ano] = dataNascimento.split('/').map(Number);
+    const dataNasc = new Date(ano, mes - 1, dia);
+    const diffMs = Date.now() - dataNasc.getTime();
+    const ageDt = new Date(diffMs);
+    return Math.abs(ageDt.getUTCFullYear() - 1970);
   }
 }
