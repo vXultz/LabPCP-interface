@@ -64,12 +64,12 @@ export class HomeAdminComponent implements OnInit {
     return Math.abs(ageDt.getUTCFullYear() - 1970);
   }
 
-  verMais(aluno: any) {
-    this.router.navigate(['/cadastro-aluno', aluno.id]);
+  verMais() {
+    this.router.navigate(['/registro-aluno']);
   }
 
-  lancarNota(aluno: any) {
-    this.router.navigate(['/cadastro-avaliacao', aluno.id]);
+  lancarNota() {
+    this.router.navigate(['/registro-avaliacao']);
   }
 
   carregarEstatisticas() {
