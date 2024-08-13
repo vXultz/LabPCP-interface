@@ -28,7 +28,7 @@
       </div>
       <div class="info-aluno">
         <h3>{{ aluno.nomeCompleto }}</h3>
-        <p>{{ aluno.dataNascimento }}</p>
+        <p>{{ calcularIdade(aluno.dataNascimento) }} anos</p>
         <p>{{ aluno.telefone }}</p>
       </div>
       <button *ngIf="isAdmin" (click)="verMais(aluno)">Ver mais</button>

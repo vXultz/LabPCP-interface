@@ -42,4 +42,12 @@ export class AlunoService {
     const todasAvaliacoes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');
     return of(todasAvaliacoes.filter((avaliacao: any) => avaliacao.alunoId === alunoId));
   }
+
+  calcularIdade(dataNascimento: string): number {
+    const [dia, mes, ano] = dataNascimento.split('/').map(Number);
+    const dataNasc = new Date(ano, mes - 1, dia);
+    const diffMs = Date.now() - dataNasc.getTime();
+    const ageDt = new Date(diffMs);
+    return Math.abs(ageDt.getUTCFullYear() - 1970);
+  }
 }

@@ -37,7 +37,7 @@ export class HomeAdminComponent implements OnInit {
     this.isAdmin = user.role === 'Admin';
     this.isDocente = user.role === 'Docente';
     this.loadAlunos();
-    this.loadEstatisticas();
+    this.carregarEstatisticas();
   }
 
   loadAlunos() {
@@ -56,6 +56,14 @@ export class HomeAdminComponent implements OnInit {
     }
   }
 
+  calcularIdade(dataNascimento: string): number {
+    const [dia, mes, ano] = dataNascimento.split('/').map(Number);
+    const dataNasc = new Date(ano, mes - 1, dia);
+    const diffMs = Date.now() - dataNasc.getTime();
+    const ageDt = new Date(diffMs);
+    return Math.abs(ageDt.getUTCFullYear() - 1970);
+  }
+
   verMais(aluno: any) {
     this.router.navigate(['/cadastro-aluno', aluno.id]);
   }
@@ -64,7 +72,7 @@ export class HomeAdminComponent implements OnInit {
     this.router.navigate(['/cadastro-avaliacao', aluno.id]);
   }
 
-  loadEstatisticas() {
+  carregarEstatisticas() {
     this.quantidadeAlunos = this.alunoService.getQuantidadeAlunos();
     this.quantidadeDocentes = this.docenteService.getQuantidadeDocentes();
     this.quantidadeTurmas = this.turmaService.getQuantidadeTurmas();
