@@ -1,0 +1,38 @@
+<div class="home-admin-container">
+  <div *ngIf="isAdmin">
+    <h2>Estatísticas</h2>
+  </div>
+  <div *ngIf="isAdmin" class="estatisticas">
+    <div class="estatistica-card">
+      <h1>{{ quantidadeAlunos }}</h1>
+      <p>Alunos</p>
+    </div>
+    <div class="estatistica-card">
+      <h1>{{ quantidadeDocentes }}</h1>
+      <p>Docentes</p>
+    </div>
+    <div class="estatistica-card">
+      <h1>{{ quantidadeTurmas }}</h1>
+      <p>Turmas</p>
+    </div>
+  </div>
+  <h3>Pesquisar aluno</h3>
+  <div class="busca-alunos">
+    <input type="text" [(ngModel)]="searchQuery" (input)="buscarAlunos()"
+      placeholder="Buscar alunos por nome ou telefone">
+  </div>
+  <div class="lista-alunos">
+    <div *ngFor="let aluno of alunos" class="aluno-card">
+      <div>
+        <img src="/assets/images/user.svg" alt="Foto do aluno" class="foto-aluno">
+      </div>
+      <div class="info-aluno">
+        <h3>{{ aluno.nome }}</h3>
+        <p>{{ calcularIdade(aluno.dataNascimento) }} anos</p>
+        <p>{{ aluno.telefone }}</p>
+      </div>
+      <button *ngIf="isAdmin" (click)="verMais(aluno.id)">Ver mais</button>
+      <button *ngIf="isDocente" (click)="lancarNota()">Lançar nota</button>
+    </div>
+  </div>
+</div>
