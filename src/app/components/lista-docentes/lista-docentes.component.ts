@@ -6,13 +6,13 @@ import { DocenteService } from '../../services/docente.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-lista-professores',
+  selector: 'app-lista-docentes',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './lista-professores.component.html',
-  styleUrls: ['./lista-professores.component.css']
+  templateUrl: './lista-docentes.component.html',
+  styleUrls: ['./lista-docentes.component.css']
 })
-export class ListaProfessoresComponent implements OnInit {
+export class ListaDocentesComponent implements OnInit {
   searchQuery: string = '';
   docentes: any[] = [];
   isAdmin: boolean = false;
@@ -48,5 +48,9 @@ export class ListaProfessoresComponent implements OnInit {
         docente.id.toString().startsWith(this.searchQuery)
       );
     }
+  }
+
+  verMais(id: number) {
+    this.router.navigate(['/registro-docente', id]);
   }
 }

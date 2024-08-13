@@ -14,7 +14,7 @@ export class RegistroTurmaComponent implements OnInit {
   turmaForm: FormGroup;
   isEditMode = false;
   isDocente = false;
-  professoresOpcao: string[] = [];
+  docentesOpcao: string[] = [];
 
   constructor(private fb: FormBuilder) {
     this.turmaForm = this.fb.group({
@@ -22,13 +22,13 @@ export class RegistroTurmaComponent implements OnInit {
       dataInicio: [new Date().toISOString().substring(0, 10), Validators.required],
       dataTermino: [new Date().toISOString().substring(0, 10), Validators.required],
       horarioTurma: [new Date().toISOString().substring(11, 16), Validators.required],
-      professor: ['', Validators.required]
+      docente: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
     const docentes = JSON.parse(localStorage.getItem('docentes') || '[]');
-    this.professoresOpcao = docentes.map((docente: any) => docente.nomeCompleto);
+    this.docentesOpcao = docentes.map((docente: any) => docente.nomeCompleto);
   }
 
   onSubmit(): void {

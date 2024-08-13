@@ -4,6 +4,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ViacepService } from '../../services/viacep.service';
 import { MatFormField, MatSelectModule } from '@angular/material/select';
+import { ActivatedRoute } from '@angular/router';
+import { DocenteService } from '../../services/docente.service';
+import { TurmaService } from '../../services/turma.service';
+import { AvaliacaoService } from '../../services/avaliacao.service';
 
 @Component({
   selector: 'app-registro-docente',
@@ -17,8 +21,16 @@ export class RegistroDocenteComponent implements OnInit {
   docenteForm: FormGroup = new FormGroup({});
   isEditMode = false;
   materiasOpcao = ['Matemática', 'Português', 'História', 'Geografia', 'Ciências', 'Inglês'];
+  docente: any;
 
-  constructor(private fb: FormBuilder, private viacepService: ViacepService) { }
+  constructor(
+    private fb: FormBuilder,
+    private viacepService: ViacepService,
+    private route: ActivatedRoute,
+    private docenteService: DocenteService,
+    private turmaService: TurmaService,
+    private avaliacaoService: AvaliacaoService
+  ) { }
 
   ngOnInit(): void {
     this.docenteForm = this.fb.group({
@@ -43,9 +55,15 @@ export class RegistroDocenteComponent implements OnInit {
       }),
     });
 
-    const savedData = localStorage.getItem('docenteData');
-    if (savedData) {
-      this.docenteForm.setValue(JSON.parse(savedData));
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.docenteService.getDocentes().subscribe((docentes) => {
+        this.docente = docentes.find(d => d.id === +id);
+        if (this.docente) {
+          this.docenteForm.patchValue(this.docente);
+          this.isEditMode = true;
+        }
+      });
     }
   }
 
@@ -86,12 +104,55 @@ export class RegistroDocenteComponent implements OnInit {
   }
 
   onEdit(): void {
-    // Não faz nada
+    if (this.docenteForm.valid) {
+      const formData = this.docenteForm.value;
+      formData.id = this.docente.id;
+
+      const dataNascimento = new Date(formData.dataNascimento);
+      formData.dataNascimento = dataNascimento.toLocaleDateString('pt-BR');
+
+      const docentes = JSON.parse(localStorage.getItem('docentes') || '[]');
+      const index = docentes.findIndex((d: { id: any; }) => d.id === this.docente.id);
+
+      if (index !== -1) {
+        docentes[index] = formData;
+        localStorage.setItem('docentes', JSON.stringify(docentes));
+        alert('Dados atualizados com sucesso!');
+      } else {
+        alert('Docente não encontrado.');
+      }
+    } else {
+      alert('Por favor, preencha todos os campos obrigatórios.');
+    }
   }
 
   onDelete(): void {
-    this.docenteForm.reset();
-    alert('Formulário resetado com sucesso!');
+    this.turmaService.getTurmas().subscribe((turmas) => {
+      const turmasVinculadas = turmas.filter(turma => turma.docenteId === this.docente.id);
+      this.avaliacaoService.getAvaliacoes().subscribe((avaliacoes) => {
+        const avaliacoesVinculadas = avaliacoes.filter(avaliacao => avaliacao.docenteId === this.docente.id);
+
+        if (turmasVinculadas.length > 0 || avaliacoesVinculadas.length > 0) {
+          let mensagem = 'Não é possível excluir o docente. Ele possui:';
+          if (turmasVinculadas.length > 0) {
+            mensagem += `\n- ${turmasVinculadas.length} turma(s) vinculada(s)`;
+          }
+          if (avaliacoesVinculadas.length > 0) {
+            mensagem += `\n- ${avaliacoesVinculadas.length} avaliação(ões) vinculada(s)`;
+          }
+          alert(mensagem);
+        } else {
+          const docentes = JSON.parse(localStorage.getItem('docentes') || '[]');
+          const index = docentes.findIndex((d: { id: any; }) => d.id === this.docente.id);
+          if (index !== -1) {
+            docentes.splice(index, 1);
+            localStorage.setItem('docentes', JSON.stringify(docentes));
+            this.docenteForm.reset();
+            alert('Docente excluído com sucesso!');
+          }
+        }
+      });
+    });
   }
 
   apenasNumero(event: KeyboardEvent): void {

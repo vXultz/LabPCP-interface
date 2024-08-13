@@ -1,5 +1,5 @@
 .notas-aluno-container {
-  padding: 20px;
+  padding: 2rem 5rem;
 }
 
 .card {
@@ -15,7 +15,6 @@
   flex: 1;
   font-size: 1.8rem;
   color: #606060;
-  margin-right: 1rem;
 }
 
 .info {
@@ -34,6 +33,7 @@ h2 {
 h3 {
   font-size: 2rem;
   color: #606060;
+  margin-bottom: 1rem;
 }
 
 .titulos {

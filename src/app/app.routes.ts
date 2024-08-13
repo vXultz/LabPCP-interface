@@ -8,7 +8,7 @@ import { RegistroDocenteComponent } from './components/registro-docente/registro
 import { RegistroTurmaComponent } from './components/registro-turma/registro-turma.component';
 import { authGuard } from './guards/auth.guard';
 import { roleGuard } from './guards/role.guard';
-import { ListaProfessoresComponent } from './components/lista-professores/lista-professores.component';
+import { ListaDocentesComponent } from './components/lista-docentes/lista-docentes.component';
 import { RegistroAlunoComponent } from './components/registro-aluno/registro-aluno.component';
 import { RegistroAvaliacaoComponent } from './components/registro-avaliacao/registro-avaliacao.component';
 import { NotasAlunoComponent } from './components/notas-aluno/notas-aluno.component';
@@ -18,10 +18,11 @@ export const routes: Routes = [
   { path: 'home-admin', component: HomeAdminComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: ['Admin', 'Docente'] } },
   { path: 'home-aluno', component: HomeAlunoComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: 'Aluno' } },
   { path: 'registro-docente', component: RegistroDocenteComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: 'Admin' } },
+  { path: 'registro-docente/:id', component: RegistroDocenteComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: 'Admin' } },
   { path: 'registro-aluno', component: RegistroAlunoComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: 'Admin' } },
   { path: 'registro-turma', component: RegistroTurmaComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: ['Admin', 'Docente'] } },
   { path: 'registro-avaliacao', component: RegistroAvaliacaoComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: ['Admin', 'Docente'] } },
-  { path: 'lista-professores', component: ListaProfessoresComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: 'Admin' } },
+  { path: 'lista-docentes', component: ListaDocentesComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: 'Admin' } },
   { path: 'notas-aluno', component: NotasAlunoComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: ['Admin', 'Aluno'] } },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }

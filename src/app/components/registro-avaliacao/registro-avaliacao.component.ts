@@ -12,13 +12,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class RegistroAvaliacaoComponent implements OnInit {
   avaliacaoForm: FormGroup;
-  professoresOpcao: string[] = [];
+  docentesOpcao: string[] = [];
   alunosOpcao: string[] = [];
   isEditMode: boolean = false;
 
   constructor(private fb: FormBuilder) {
     this.avaliacaoForm = this.fb.group({
-      professor: ['', Validators.required],
+      docente: ['', Validators.required],
       aluno: ['', Validators.required],
       nomeMateria: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
       nomeAvaliacao: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
@@ -29,7 +29,7 @@ export class RegistroAvaliacaoComponent implements OnInit {
 
   ngOnInit(): void {
     const docentes = JSON.parse(localStorage.getItem('docentes') || '[]');
-    this.professoresOpcao = docentes.map((docente: any) => docente.nomeCompleto);
+    this.docentesOpcao = docentes.map((docente: any) => docente.nomeCompleto);
 
     const alunos = JSON.parse(localStorage.getItem('alunos') || '[]');
     this.alunosOpcao = alunos.map((aluno: any) => aluno.nomeCompleto);
@@ -44,8 +44,8 @@ export class RegistroAvaliacaoComponent implements OnInit {
       formData.dataAvaliacao = dataAvaliacao.toLocaleDateString('pt-BR');
 
       const docentes = JSON.parse(localStorage.getItem('docentes') || '[]');
-      const docenteSelecionado = docentes.find((docente: any) => docente.nomeCompleto === formData.professor);
-      formData.professorId = docenteSelecionado ? docenteSelecionado.id : null;
+      const docenteSelecionado = docentes.find((docente: any) => docente.nomeCompleto === formData.docente);
+      formData.docenteId = docenteSelecionado ? docenteSelecionado.id : null;
 
       const alunos = JSON.parse(localStorage.getItem('alunos') || '[]');
       const alunoSelecionado = alunos.find((aluno: any) => aluno.nomeCompleto === formData.aluno);
