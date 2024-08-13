@@ -1,0 +1,76 @@
+.notas-aluno-container {
+  padding: 20px;
+}
+
+.card {
+  border: 3px solid #7A66E4;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 50%;
+}
+
+.card p {
+  flex: 1;
+  font-size: 1.8rem;
+  color: #606060;
+  margin-right: 1rem;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10rem;
+}
+
+h2 {
+  font-size: 3rem;
+  color: #735fe2;
+  margin: 5rem 0;
+}
+
+h3 {
+  font-size: 2rem;
+  color: #606060;
+}
+
+.titulos {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  font-size: 2rem;
+  color: #333;
+  padding: 1rem;
+}
+
+.titulos h5 {
+  flex: 1;
+  text-align: center;
+}
+
+.avaliacao-card {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 3px solid #7A66E4;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+}
+
+.avaliacao-card p {
+  flex: 1;
+  text-align: center;
+}
+
+.avaliacao-card:nth-child(odd) {
+  color: #333;
+}
+
+.avaliacao-card:nth-child(even) {
+  background-color: #7A66E4;
+  color: white;
+}

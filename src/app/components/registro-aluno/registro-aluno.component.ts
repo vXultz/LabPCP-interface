@@ -56,6 +56,19 @@ export class RegistroAlunoComponent implements OnInit {
       const formData = this.alunoForm.value;
       formData.id = this.gerarIdUnico();
 
+      const turmas = JSON.parse(localStorage.getItem('turmas') || '[]');
+      console.log('Turmas carregadas:', turmas);
+      const turmaSelecionada = turmas.find((turma: any) => turma.nomeTurma === formData.turma);
+      console.log('Turma selecionada:', turmaSelecionada);
+
+      if (turmaSelecionada) {
+        formData.turmaId = turmaSelecionada.id;
+        console.log('Turma ID:', formData.turmaId);
+      } else {
+        formData.turmaId = null;
+        console.log('Nenhuma turma encontrada com o nome:', formData.turma);
+      }
+
       const alunos = JSON.parse(localStorage.getItem('alunos') || '[]');
       alunos.push(formData);
       localStorage.setItem('alunos', JSON.stringify(alunos));
