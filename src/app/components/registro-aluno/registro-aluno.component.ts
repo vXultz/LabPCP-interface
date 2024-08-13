@@ -56,6 +56,9 @@ export class RegistroAlunoComponent implements OnInit {
       const formData = this.alunoForm.value;
       formData.id = this.gerarIdUnico();
 
+      const dataNascimento = new Date(formData.dataNascimento);
+      formData.dataNascimento = dataNascimento.toLocaleDateString('pt-BR');
+
       const turmas = JSON.parse(localStorage.getItem('turmas') || '[]');
       console.log('Turmas carregadas:', turmas);
       const turmaSelecionada = turmas.find((turma: any) => turma.nomeTurma === formData.turma);
