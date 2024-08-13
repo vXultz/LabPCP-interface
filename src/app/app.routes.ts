@@ -11,6 +11,7 @@ import { roleGuard } from './guards/role.guard';
 import { ListaProfessoresComponent } from './components/lista-professores/lista-professores.component';
 import { RegistroAlunoComponent } from './components/registro-aluno/registro-aluno.component';
 import { RegistroAvaliacaoComponent } from './components/registro-avaliacao/registro-avaliacao.component';
+import { NotasAlunoComponent } from './components/notas-aluno/notas-aluno.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -21,6 +22,7 @@ export const routes: Routes = [
   { path: 'registro-turma', component: RegistroTurmaComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: ['Admin', 'Docente'] } },
   { path: 'registro-avaliacao', component: RegistroAvaliacaoComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: ['Admin', 'Docente'] } },
   { path: 'lista-professores', component: ListaProfessoresComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: 'Admin' } },
+  { path: 'notas-aluno', component: NotasAlunoComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: ['Admin', 'Aluno'] } },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];

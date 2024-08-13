@@ -5,15 +5,18 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class AlunoService {
-  private alunos = [
-    { id: 1, nomeCompleto: 'Vitor', idade: 28, contato: 'vitor@example.com' },
-    { id: 2, nomeCompleto: 'Pedro', idade: 32, contato: 'pedro@example.com' },
-  ];
+  private alunos = [];
 
   getAlunos(): Observable<any[]> {
     const storedAlunos = JSON.parse(localStorage.getItem('alunos') || '[]');
     const allAlunos = [...this.alunos, ...storedAlunos];
     return of(allAlunos);
+  }
+
+  getAlunoById(id: number): Observable<any> {
+    const storedAlunos = JSON.parse(localStorage.getItem('alunos') || '[]');
+    const allAlunos = [...this.alunos, ...storedAlunos];
+    return of(allAlunos.find(aluno => aluno.id === id));
   }
 
   searchAlunos(query: string): Observable<any[]> {
@@ -37,5 +40,15 @@ export class AlunoService {
   getQuantidadeTurmas(): number {
     // fazer o método
     return 5;
+  }
+
+  getTurmaById(id: number): Observable<any> {
+    const storedTurmas = JSON.parse(localStorage.getItem('turmas') || '[]');
+    return of(storedTurmas.find((turma: any) => turma.id === id));
+  }
+
+  getAvaliacoesByAlunoId(alunoId: number): Observable<any[]> {
+    const todasAvaliacoes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');
+    return of(todasAvaliacoes.filter((avaliacao: any) => avaliacao.alunoId === alunoId));
   }
 }
