@@ -40,6 +40,9 @@ export class RegistroAvaliacaoComponent implements OnInit {
       const formData = this.avaliacaoForm.value;
       formData.id = this.gerarIdUnico();
 
+      const dataAvaliacao = new Date(formData.dataAvaliacao);
+      formData.dataAvaliacao = dataAvaliacao.toLocaleDateString('pt-BR');
+
       const docentes = JSON.parse(localStorage.getItem('docentes') || '[]');
       const docenteSelecionado = docentes.find((docente: any) => docente.nomeCompleto === formData.professor);
       formData.professorId = docenteSelecionado ? docenteSelecionado.id : null;
