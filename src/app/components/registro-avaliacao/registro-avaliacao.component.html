@@ -1,0 +1,48 @@
+<form [formGroup]="avaliacaoForm" (ngSubmit)="onSubmit()">
+  <div class="parent">
+    <div class="header">
+      <h2>Cadastrar nova avaliação</h2>
+      <div class="action-buttons">
+        <button class="editar" type="button" (click)="onEdit()" [disabled]="!isEditMode">Editar</button>
+        <button type="button" (click)="onDelete()" [disabled]="!isEditMode">Excluir</button>
+      </div>
+    </div>
+    <div class="div1">
+      <div class="form-group">
+        <label>Docente</label>
+        <select formControlName="docente">
+          <option *ngFor="let docente of docentesOpcao" [value]="docente">{{docente}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Aluno</label>
+        <select formControlName="aluno">
+          <option *ngFor="let aluno of alunosOpcao" [value]="aluno">{{aluno}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="div2">
+      <div class="form-group">
+        <label>Nome da matéria</label>
+        <input formControlName="nomeMateria" maxlength="64" minlength="8" required />
+      </div>
+      <div class="form-group">
+        <label>Nome da avaliação</label>
+        <input formControlName="nomeAvaliacao" maxlength="64" minlength="8" required />
+      </div>
+    </div>
+    <div class="div3">
+      <div class="form-group">
+        <label>Data da avaliação</label>
+        <input type="date" formControlName="dataAvaliacao" required />
+      </div>
+      <div class="form-group">
+        <label>Nota</label>
+        <input formControlName="nota" (keypress)="apenasNumero($event)" required />
+      </div>
+    </div>
+    <div class="div4">
+      <button type="submit">Salvar</button>
+    </div>
+  </div>
+</form>

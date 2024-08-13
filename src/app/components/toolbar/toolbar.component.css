@@ -1,0 +1,27 @@
+.toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #f8f9fa;
+  position: relative;
+}
+
+.info-usuario {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 150px;
+}
+
+.foto-usuario {
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+}

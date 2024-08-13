@@ -1,0 +1,45 @@
+<div class="notas-aluno-container">
+  <h2>Notas do Aluno</h2>
+  <h3>Informações do Aluno</h3>
+  <div class="card">
+    <div class="info">
+      <p>Nome: <strong>{{ aluno.nome }}</strong></p>
+      <p>Telefone: <strong>{{ aluno.telefone }}</strong></p>
+    </div>
+    <div class="info">
+      <p>Email: <strong>{{ aluno.email }}</strong></p>
+      <p>CPF: <strong>{{ aluno.cpf }}</strong></p>
+    </div>
+    <div class="info">
+      <p>Gênero: <strong>{{ aluno.genero }}</strong></p>
+    </div>
+  </div>
+  <h3>Turma</h3>
+  <div class="card">
+    <div class="info">
+      <p>Docente: <strong>{{ turma.docente }}</strong></p>
+      <p>Horário: <strong>{{ turma.horarioTurma }}</strong></p>
+    </div>
+    <div class="info">
+      <p>Nome da Turma: <strong>{{ turma.nomeTurma }}</strong></p>
+    </div>
+  </div>
+  <h3>Histórico de Avaliações</h3>
+  <div class="titulos">
+    <h5>ID</h5>
+    <h5>Nome da Avaliação</h5>
+    <h5>Data</h5>
+    <h5>Matéria</h5>
+    <h5>Nota</h5>
+  </div>
+  <div class="lista-avaliacoes">
+    <div *ngFor="let avaliacao of avaliacoes" class="avaliacao-card">
+      <p>{{ avaliacao.id }}</p>
+      <p>{{ avaliacao.nomeAvaliacao }}</p>
+      <p>{{ avaliacao.dataAvaliacao }}</p>
+      <p>{{ avaliacao.nomeMateria }}</p>
+      <p>{{ avaliacao.nota }}</p>
+    </div>
+  </div>
+
+</div>
