@@ -3,8 +3,8 @@
     <div class="header">
       <h2>Cadastrar novo aluno</h2>
       <div class="action-buttons">
-        <button class="editar" type="button" (click)="onEdit()">Editar</button>
-        <button type="button" (click)="onDelete()">Excluir</button>
+        <button class="editar" type="button" (click)="onEdit()" [disabled]="!isEditMode">Editar</button>
+        <button type="button" (click)="onDelete()" [disabled]="!isEditMode">Excluir</button>
       </div>
     </div>
     <div class="div1">

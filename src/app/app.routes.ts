@@ -20,6 +20,7 @@ export const routes: Routes = [
   { path: 'registro-docente', component: RegistroDocenteComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: 'Admin' } },
   { path: 'registro-docente/:id', component: RegistroDocenteComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: 'Admin' } },
   { path: 'registro-aluno', component: RegistroAlunoComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: 'Admin' } },
+  { path: 'registro-aluno/:id', component: RegistroAlunoComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: 'Admin' } },
   { path: 'registro-turma', component: RegistroTurmaComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: ['Admin', 'Docente'] } },
   { path: 'registro-avaliacao', component: RegistroAvaliacaoComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: ['Admin', 'Docente'] } },
   { path: 'lista-docentes', component: ListaDocentesComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: 'Admin' } },
