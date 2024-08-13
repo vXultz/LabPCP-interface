@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registro-avaliacao',
@@ -12,27 +12,27 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class RegistroAvaliacaoComponent implements OnInit {
   avaliacaoForm: FormGroup;
-  professoresOpcao: string[] = [];
+  docentesOpcao: string[] = [];
   alunosOpcao: string[] = [];
   isEditMode: boolean = false;
 
   constructor(private fb: FormBuilder) {
     this.avaliacaoForm = this.fb.group({
-      professor: ['', Validators.required],
+      docente: ['', Validators.required],
       aluno: ['', Validators.required],
       nomeMateria: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
       nomeAvaliacao: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
       dataAvaliacao: ['', Validators.required],
-      nota: ['', Validators.required]
+      nota: ['', [Validators.required, this.validarNota]]
     });
   }
 
   ngOnInit(): void {
     const docentes = JSON.parse(localStorage.getItem('docentes') || '[]');
-    this.professoresOpcao = docentes.map((docente: any) => docente.nomeCompleto);
+    this.docentesOpcao = docentes.map((docente: any) => docente.nome);
 
     const alunos = JSON.parse(localStorage.getItem('alunos') || '[]');
-    this.alunosOpcao = alunos.map((aluno: any) => aluno.nomeCompleto);
+    this.alunosOpcao = alunos.map((aluno: any) => aluno.nome);
   }
 
   onSubmit(): void {
@@ -44,11 +44,11 @@ export class RegistroAvaliacaoComponent implements OnInit {
       formData.dataAvaliacao = dataAvaliacao.toLocaleDateString('pt-BR');
 
       const docentes = JSON.parse(localStorage.getItem('docentes') || '[]');
-      const docenteSelecionado = docentes.find((docente: any) => docente.nomeCompleto === formData.professor);
-      formData.professorId = docenteSelecionado ? docenteSelecionado.id : null;
+      const docenteSelecionado = docentes.find((docente: any) => docente.nome === formData.docente);
+      formData.docenteId = docenteSelecionado ? docenteSelecionado.id : null;
 
       const alunos = JSON.parse(localStorage.getItem('alunos') || '[]');
-      const alunoSelecionado = alunos.find((aluno: any) => aluno.nomeCompleto === formData.aluno);
+      const alunoSelecionado = alunos.find((aluno: any) => aluno.nome === formData.aluno);
       formData.alunoId = alunoSelecionado ? alunoSelecionado.id : null;
 
       const avaliacoes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');
@@ -57,8 +57,44 @@ export class RegistroAvaliacaoComponent implements OnInit {
 
       alert('Avaliação salva com sucesso!');
     } else {
-      alert('Por favor, preencha todos os campos obrigatórios.');
+      const errors = this.getFormValidationErrors();
+      alert(`Por favor, corrija os seguintes erros:\n${errors.join('\n')}`);
     }
+  }
+
+  getFormValidationErrors(): string[] {
+    const errors: string[] = [];
+    const controls = this.avaliacaoForm.controls;
+
+    Object.keys(controls).forEach(key => {
+      const controlErrors = controls[key].errors;
+      if (controlErrors) {
+        Object.keys(controlErrors).forEach(errorKey => {
+          errors.push(this.getErrorMessage(key, errorKey, controlErrors[errorKey]));
+        });
+      }
+    });
+
+    return errors;
+  }
+
+  getErrorMessage(controlName: string, errorName: string, errorValue: any): string {
+    const errorMessages: { [key: string]: string } = {
+      required: 'Este campo é obrigatório.',
+      minlength: `O valor deve ter no mínimo ${errorValue.requiredLength} caracteres.`,
+      maxlength: `O valor deve ter no máximo ${errorValue.requiredLength} caracteres.`,
+      notaInvalida: 'A nota deve estar entre 0 e 10.'
+    };
+
+    return `${controlName}: ${errorMessages[errorName] || 'Erro desconhecido'}`;
+  }
+
+  validarNota(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (value < 0 || value > 10) {
+      return { notaInvalida: true };
+    }
+    return null;
   }
 
   gerarIdUnico(): number {
@@ -80,7 +116,6 @@ export class RegistroAvaliacaoComponent implements OnInit {
   }
 
   onDelete(): void {
-    this.avaliacaoForm.reset();
-    alert('Formulário resetado com sucesso!');
+    // Não faz nada
   }
 }

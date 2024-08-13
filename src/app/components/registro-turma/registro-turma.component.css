@@ -99,7 +99,7 @@ button:hover {
   background-color: #5633c9;
 }
 
-.form-group select[formControlName="professor"] {
+.form-group select[formControlName="docente"] {
   max-width: 50%;
 }
 

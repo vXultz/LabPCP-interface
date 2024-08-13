@@ -27,11 +27,11 @@
         <img src="/assets/images/user.svg" alt="Foto do aluno" class="foto-aluno">
       </div>
       <div class="info-aluno">
-        <h3>{{ aluno.nomeCompleto }}</h3>
+        <h3>{{ aluno.nome }}</h3>
         <p>{{ calcularIdade(aluno.dataNascimento) }} anos</p>
         <p>{{ aluno.telefone }}</p>
       </div>
-      <button *ngIf="isAdmin" (click)="verMais()">Ver mais</button>
+      <button *ngIf="isAdmin" (click)="verMais(aluno.id)">Ver mais</button>
       <button *ngIf="isDocente" (click)="lancarNota()">Lançar nota</button>
     </div>
   </div>

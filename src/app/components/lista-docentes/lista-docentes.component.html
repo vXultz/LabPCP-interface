@@ -1,4 +1,4 @@
-<div class="lista-professores-container" *ngIf="isAdmin">
+<div class="lista-docentes-container" *ngIf="isAdmin">
   <h2>Listagem de docentes</h2>
   <div class="busca-docentes">
     <input type="text" [(ngModel)]="searchQuery" (input)="buscarDocentes()"
@@ -13,9 +13,9 @@
   <div class="lista-docentes">
     <div *ngFor="let docente of docentes" class="docente-card">
       <p>{{ docente.id }}</p>
-      <p>{{ docente.nomeCompleto }}</p>
+      <p>{{ docente.nome }}</p>
       <p>{{ docente.telefone }}</p>
-      <button>Ver Mais</button>
+      <button (click)="verMais(docente.id)">Ver Mais</button>
     </div>
   </div>
 </div>

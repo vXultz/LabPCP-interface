@@ -14,7 +14,7 @@ export class RegistroTurmaComponent implements OnInit {
   turmaForm: FormGroup;
   isEditMode = false;
   isDocente = false;
-  professoresOpcao: string[] = [];
+  docentesOpcao: string[] = [];
 
   constructor(private fb: FormBuilder) {
     this.turmaForm = this.fb.group({
@@ -22,13 +22,13 @@ export class RegistroTurmaComponent implements OnInit {
       dataInicio: [new Date().toISOString().substring(0, 10), Validators.required],
       dataTermino: [new Date().toISOString().substring(0, 10), Validators.required],
       horarioTurma: [new Date().toISOString().substring(11, 16), Validators.required],
-      professor: ['', Validators.required]
+      docente: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
     const docentes = JSON.parse(localStorage.getItem('docentes') || '[]');
-    this.professoresOpcao = docentes.map((docente: any) => docente.nomeCompleto);
+    this.docentesOpcao = docentes.map((docente: any) => docente.nome);
   }
 
   onSubmit(): void {
@@ -50,8 +50,34 @@ export class RegistroTurmaComponent implements OnInit {
 
       alert('Dados salvos com sucesso!');
     } else {
-      alert('Por favor, preencha todos os campos obrigatórios.');
+      const errors = this.getFormValidationErrors();
+      alert(`Por favor, corrija os seguintes erros:\n${errors.join('\n')}`);
     }
+  }
+
+  getFormValidationErrors(): string[] {
+    const errors: string[] = [];
+    const controls = this.turmaForm.controls;
+
+    Object.keys(controls).forEach(key => {
+      const controlErrors = controls[key].errors;
+      if (controlErrors) {
+        Object.keys(controlErrors).forEach(errorKey => {
+          errors.push(this.getErrorMessage(key, errorKey, controlErrors[errorKey]));
+        });
+      }
+    });
+    return errors;
+  }
+
+  getErrorMessage(controlName: string, errorKey: string, errorValue: any): string {
+    const messages: { [key: string]: string } = {
+      required: `${controlName} é obrigatório.`,
+      minlength: `${controlName} deve ter no mínimo ${errorValue.requiredLength} caracteres.`,
+      maxlength: `${controlName} deve ter no máximo ${errorValue.requiredLength} caracteres.`
+    };
+
+    return messages[errorKey] || `${controlName} está inválido.`;
   }
 
   onEdit(): void {
@@ -59,8 +85,7 @@ export class RegistroTurmaComponent implements OnInit {
   }
 
   onDelete(): void {
-    this.turmaForm.reset();
-    alert('Formulário resetado com sucesso!');
+    // Não faz nada
   }
 
   gerarIdUnico(): number {

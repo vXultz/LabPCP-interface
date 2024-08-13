@@ -64,8 +64,8 @@ export class HomeAdminComponent implements OnInit {
     return Math.abs(ageDt.getUTCFullYear() - 1970);
   }
 
-  verMais() {
-    this.router.navigate(['/registro-aluno']);
+  verMais(alunoId: number): void {
+    this.router.navigate(['/registro-aluno', alunoId]);
   }
 
   lancarNota() {
