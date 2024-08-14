@@ -1,28 +1,57 @@
 # LabPCP
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.6.
+Neste projeto de front-end você encontrará uma solução para sistema escolar. Neste sistema há 3 tipos de usuários, **Admin, Docente e Aluno**, cada um podendo acessar e interagir com diferentes páginas.
 
-## Development server
+As páginas com formulários contam com diversar verificações para que todos campos sejam preenchidos corretamente. Neste sistema todas informações são salvar no localStorage.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Neste projeto, foram utilizadas as seguintes tecnologias:
 
-## Code scaffolding
+- Angular 18
+- Angular Material
+- TypeScript
+- Consumo API ViaCep
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Funcionalidades dos tipos de Usuário
 
-## Build
+- **Admin**: acessa todas páginas com excessão de Notas-aluno, pode editar e deletar dados.
+- **Docente**: acessa apenas as páginas home, registro-turma e registro-avaliacao, pode editar e deletar turmas ou avaliações apenas.
+- **Aluno**: acessa apenas as páginas home e notas-aluno.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Execução
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Para poder executar o projeto, faça um clone do repositório usando:
 
-## Running end-to-end tests
+```
+  git clone git@github.com:vXultz/LabPCP-interface.git
+```
+Após clonar, execute o comando:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```
+  npm install
+```
 
-## Further help
+Após isso execute este comando para rodar o projeto:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-"# LabPCP-interface" 
+```
+  ng serve
+```
+
+## Fluxo de cadastro e Logins
+
+Assim que você rodar o projeto, não terá nenhuma informação salva e alguns elementos não irão aparecer por conta disso.
+
+No primeiro momento faça login como Admin e faça pelo menos 1 cadastro para cada item nesta ordem:
+
+    1- Docente
+    2- Turma
+    3- Aluno
+    4- Avaliação
+
+Fazendo isso você poderá ver todos elementos das páginas.
+
+Os logins e senhas para entrar no sistema são:
+
+    1- email: 'admin@example.com', senha: 'admin123', role: 'Admin'
+    2- email: 'docente@example.com', senha: 'docente123', role: 'Docente'
+    3- email: 'aluno@example.com', senha: 'aluno123', role: 'Aluno'
