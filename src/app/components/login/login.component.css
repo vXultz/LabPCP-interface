@@ -71,3 +71,66 @@ body {
   justify-content: space-around;
   font-size: 1rem;
 }
+
+@media (max-width: 1024px) {
+  .login-container {
+    width: 50%;
+    padding: 2.5rem;
+  }
+
+  .login-container h3 {
+    font-size: 3.5rem;
+  }
+
+  .login-container form label,
+  .login-container form input {
+    font-size: 1.5rem;
+  }
+
+  .login-container button,
+  .login-button {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    width: 80%;
+    padding: 2rem;
+  }
+
+  .login-container h3 {
+    font-size: 3rem;
+  }
+
+  .login-container form label,
+  .login-container form input {
+    font-size: 1.4rem;
+  }
+
+  .login-container button,
+  .login-button {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .login-container {
+    width: 95%;
+    padding: 1.5rem;
+  }
+
+  .login-container h3 {
+    font-size: 2.5rem;
+  }
+
+  .login-container form label,
+  .login-container form input {
+    font-size: 1.2rem;
+  }
+
+  .login-container button,
+  .login-button {
+    font-size: 1.8rem;
+  }
+}

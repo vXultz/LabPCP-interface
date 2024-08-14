@@ -89,3 +89,73 @@ button {
   font-size: 1.4rem;
   transition: background-color 0.3s;
 }
+
+@media (max-width: 1024px) {
+  .lista-docentes-container {
+    padding: 2rem;
+  }
+
+  .busca-docentes input {
+    width: 60%;
+  }
+
+  .docente-card {
+    font-size: 1.6rem;
+  }
+
+  .docente-card button {
+    width: 30%;
+  }
+}
+
+@media (max-width: 768px) {
+  .lista-docentes-container {
+    padding: 1rem;
+  }
+
+  .busca-docentes input {
+    width: 80%;
+  }
+
+  .titulos {
+    font-size: 1.8rem;
+  }
+
+  .docente-card {
+    font-size: 1.4rem;
+  }
+
+  .docente-card button {
+    width: 20%;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .lista-docentes-container {
+    padding: 0.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .busca-docentes input {
+    width: 100%;
+  }
+
+  .titulos {
+    font-size: 1.5rem;
+  }
+
+  .docente-card {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+  }
+
+  .docente-card button {
+    width: 20%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+  }
+}
