@@ -95,3 +95,93 @@ h3 {
   color: #333;
   font-weight: bold;
 }
+
+@media (max-width: 1024px) {
+  .estatisticas {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .estatistica-card {
+    width: 80%;
+    margin-bottom: 2rem;
+  }
+
+  .busca-alunos input {
+    width: 50%;
+  }
+
+  .lista-alunos {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-admin-container {
+    padding: 1rem 2rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  h3 {
+    font-size: 1.8rem;
+  }
+
+  .estatistica-card {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .busca-alunos input {
+    width: 70%;
+  }
+
+  .lista-alunos {
+    gap: 1rem;
+  }
+
+  .aluno-card {
+    width: 150px;
+  }
+
+  .aluno-card button {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .home-admin-container {
+    padding: 1rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  .estatistica-card {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .busca-alunos input {
+    width: 100%;
+  }
+
+  .lista-alunos {
+    gap: 0.5rem;
+  }
+
+  .aluno-card {
+    width: 100%;
+  }
+
+  .aluno-card button {
+    font-size: 1.2rem;
+  }
+}
