@@ -75,3 +75,75 @@ h3 {
   background-color: #7A66E4;
   color: white;
 }
+
+@media (max-width: 1024px) {
+  .notas-aluno-container {
+    padding: 2rem;
+  }
+
+  .card {
+    width: 70%;
+  }
+
+  .info {
+    gap: 5rem;
+  }
+
+  .titulos {
+    font-size: 1.8rem;
+  }
+
+  .avaliacao-card {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .notas-aluno-container {
+    padding: 1rem;
+  }
+
+  .card {
+    width: 90%;
+  }
+
+  .info {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .titulos {
+    display: none;
+  }
+
+  .avaliacao-card {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .notas-aluno-container {
+    padding: 0.5rem;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  .titulos {
+    font-size: 1.4rem;
+  }
+
+  .avaliacao-card {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+  }
+}
